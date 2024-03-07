@@ -1,4 +1,4 @@
-package bessa.morangon.rafael.api.services;
+2package bessa.morangon.rafael.api.services;
 
 import bessa.morangon.rafael.api.domain.dto.DespesaDTO;
 import bessa.morangon.rafael.api.domain.dto.ReceitaDTO;
@@ -34,7 +34,7 @@ public class DespesaService {
     public ResponseEntity<Page<DespesaDTO>> buscaTudoPelaDescricao(String descricao, Pageable pageable) {
         Page<Despesa> allByDescricao = repository.findAllByDescricao(descricao, pageable);
 
-        if(allByDescricao.getSize() == 0){
+        if(allByDescricao.getTotalElements() == 0){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(allByDescricao.map(d -> mapper.map(d, DespesaDTO.class)));
